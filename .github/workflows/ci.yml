@@ -1,0 +1,15 @@
+# oss-intel の osint の本番の確かめ用（gh-intel t151）。手で起動しない限り動かない。
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container:
+      image: ghcr.io/gh-intel-e2e/build@sha256:0000000000000000000000000000000000000000000000000000000000000000
+      credentials:
+        username: builder
+        password: ${{ vars.REGISTRY_PASSWORD }}
+    steps:
+      - run: make
